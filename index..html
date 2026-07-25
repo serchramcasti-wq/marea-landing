@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marea — el copiloto financiero para ingresos irregulares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16231F;
+    --ink-soft: #3E4C46;
+    --paper: #EEF0EA;
+    --card: #FFFFFF;
+    --teal: #0F6E56;
+    --teal-deep: #0A4F3D;
+    --navy: #10242B;
+    --gold: #B8901F;
+    --coral: #B14634;
+    --border: rgba(22,35,31,0.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+  .display { font-family: 'Fraunces', serif; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  em.hl { font-style: italic; color: var(--teal-deep); }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 0;
+  }
+  .logo { display: flex; align-items: center; gap: 8px; font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+  .logo svg { display: block; }
+  .btn {
+    display: inline-block; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500;
+    font-size: 14px; padding: 10px 18px; border-radius: 4px; border: none;
+    cursor: pointer; text-decoration: none; transition: opacity 0.15s ease;
+  }
+  .btn:hover { opacity: 0.88; }
+  .btn-primary { background: var(--teal-deep); color: #F3F5EF; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+
+  .hero { padding: 40px 0 8px; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--teal-deep); margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif; font-weight: 500; font-size: 44px; line-height: 1.08;
+    letter-spacing: -0.01em; max-width: 11.5em; margin-bottom: 20px;
+  }
+  .sub { font-size: 18px; color: var(--ink-soft); max-width: 34em; margin-bottom: 32px; }
+
+  .chart-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px 24px 20px; margin-bottom: 44px;
+  }
+  .chart-card .caption { font-size: 13px; color: var(--ink-soft); margin-top: 10px; }
+  .chart-card .caption .mono { color: var(--ink); }
+
+  section { padding: 52px 0; border-top: 1px solid var(--border); }
+  h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 28px; line-height: 1.2; margin-bottom: 14px; max-width: 16em; }
+  .lede { font-size: 16px; color: var(--ink-soft); max-width: 36em; margin-bottom: 32px; }
+
+  .pain-list { display: flex; flex-direction: column; gap: 0; }
+  .pain-item {
+    display: flex; gap: 18px; padding: 20px 0; border-top: 1px solid var(--border);
+  }
+  .pain-item:first-child { border-top: none; }
+  .pain-mark { flex-shrink: 0; width: 4px; background: var(--coral); border-radius: 2px; }
+  .pain-item p { font-size: 16px; }
+  .pain-item .q { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: var(--ink); }
+
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .pillar { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px 20px; }
+  .pillar .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--paper); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .pillar h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px; margin-bottom: 8px; }
+  .pillar p { font-size: 14px; color: var(--ink-soft); }
+
+  .stat-block {
+    background: var(--navy); color: #EDEFE8; border-radius: 16px; padding: 40px 36px; text-align: left;
+  }
+  .stat-block .num { font-family: 'Fraunces', serif; font-weight: 500; font-size: 56px; color: var(--gold); line-height: 1; display: block; margin-bottom: 12px; }
+  .stat-block p { font-size: 17px; max-width: 30em; color: #D7DBD1; }
+  .stat-block .source { font-size: 12px; color: #8FA096; margin-top: 16px; font-family: 'IBM Plex Mono', monospace; }
+
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; gap: 20px; padding: 22px 0; border-top: 1px solid var(--border); }
+  .step:first-child { border-top: none; }
+  .step .n { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal-deep); flex-shrink: 0; width: 24px; padding-top: 2px; }
+  .step h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px; margin-bottom: 4px; }
+  .step p { font-size: 14px; color: var(--ink-soft); }
+
+  .cta-card {
+    background: var(--teal-deep); border-radius: 18px; padding: 44px 36px; color: #F3F5EF;
+  }
+  .cta-card h2 { color: #F3F5EF; max-width: 18em; }
+  .cta-card .lede { color: #C8D8CF; }
+  .scarcity {
+    display: inline-flex; align-items: center; gap: 8px; background: rgba(184,144,31,0.18);
+    color: #E8CD82; font-family: 'IBM Plex Mono', monospace; font-size: 12px; padding: 6px 12px;
+    border-radius: 100px; margin-bottom: 20px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: #E8CD82; }
+  form.waitlist { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .waitlist input[type=email] {
+    flex: 1; min-width: 220px; padding: 13px 16px; border-radius: 6px; border: none;
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 15px; background: #EDEFE8; color: var(--ink);
+  }
+  .waitlist input[type=email]:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .waitlist .btn-primary { background: var(--gold); color: #251C05; font-weight: 600; }
+  .fine-print { font-size: 12px; color: #9FB2A5; }
+  .jotform-shell { background: #FFFFFF; border-radius: 12px; padding: 6px; margin-bottom: 14px; }
+  .jotform-shell iframe { display: block; border-radius: 8px; }
+
+  details {
+    border-top: 1px solid var(--border); padding: 18px 0;
+  }
+  details:last-child { border-bottom: 1px solid var(--border); }
+  summary {
+    cursor: pointer; font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500;
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-family: 'IBM Plex Mono', monospace; font-size: 20px; color: var(--teal-deep); }
+  details[open] summary::after { content: '–'; }
+  details p { font-size: 15px; color: var(--ink-soft); margin-top: 12px; max-width: 34em; }
+
+  footer { padding: 40px 0 60px; text-align: center; }
+  footer p { font-size: 13px; color: var(--ink-soft); margin-bottom: 18px; }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 32px; }
+    .pillars { grid-template-columns: 1fr; }
+    .stat-block .num { font-size: 42px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <svg width="26" height="20" viewBox="0 0 26 20" fill="none">
+        <path d="M1 14C4 14 4 6 7 6C10 6 10 14 13 14C16 14 16 6 19 6C22 6 22 14 25 14" stroke="#0F6E56" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Marea
+    </div>
+    <a href="#unirme" class="btn btn-ghost">Unirme a la lista</a>
+  </header>
+
+  <section class="hero" style="border-top: none; padding-top: 8px;">
+    <p class="eyebrow">Para freelancers e independientes en México</p>
+    <h1>Ingreso variable. Ansiedad fija. <em class="hl">Hasta ahora.</em></h1>
+    <p class="sub">Marea es el copiloto financiero que entiende que no facturas lo mismo cada mes. Te dice exactamente cuánto apartar para impuestos, cuánto colchón tienes de verdad, y si vas bien comparado con otros como tú.</p>
+
+    <div class="chart-card">
+      <svg viewBox="0 0 600 200" width="100%" height="auto" role="img" aria-label="Gráfica de ingreso mensual de un freelancer, de febrero a julio, mostrando fuerte variación entre 12,000 y 45,000 pesos">
+        <line x1="40" y1="99" x2="560" y2="99" stroke="#B7BEB6" stroke-width="1" stroke-dasharray="3,4"/>
+        <text x="565" y="103" class="mono" font-size="11" fill="#8A948B">promedio</text>
+        <polyline points="40,83 144,151 248,20 352,180 456,54 560,107" fill="none" stroke="#0F6E56" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="40" cy="83" r="4" fill="#0F6E56"/>
+        <circle cx="144" cy="151" r="4" fill="#0F6E56"/>
+        <circle cx="248" cy="20" r="5" fill="#B8901F"/>
+        <circle cx="352" cy="180" r="5" fill="#B14634"/>
+        <circle cx="456" cy="54" r="4" fill="#0F6E56"/>
+        <circle cx="560" cy="107" r="4" fill="#0F6E56"/>
+        <text x="248" y="12" text-anchor="middle" class="display" font-style="italic" font-size="13" fill="#8A6C10">tu mejor mes</text>
+        <text x="352" y="196" text-anchor="middle" class="display" font-style="italic" font-size="13" fill="#8C3E2C">tu mes más flojo</text>
+        <text x="40" y="216" class="mono" font-size="11" fill="#8A948B">feb</text>
+        <text x="140" y="216" class="mono" font-size="11" fill="#8A948B">mar</text>
+        <text x="244" y="216" class="mono" font-size="11" fill="#8A948B">abr</text>
+        <text x="348" y="216" class="mono" font-size="11" fill="#8A948B">may</text>
+        <text x="452" y="216" class="mono" font-size="11" fill="#8A948B">jun</text>
+        <text x="556" y="216" class="mono" font-size="11" fill="#8A948B">jul</text>
+      </svg>
+      <p class="caption">Así se ve un semestre real de freelance: de <span class="mono">$45,000</span> a <span class="mono">$12,000</span>. Ninguna app de banco fue diseñada para esto.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>¿Te suena familiar?</h2>
+    <p class="lede">No es que no sepas administrarte. Es que ninguna herramienta fue hecha para tu tipo de ingreso.</p>
+    <div class="pain-list">
+      <div class="pain-item"><div class="pain-mark"></div><p class="q">"Facturé el doble este mes. No tengo idea si el próximo facturaré algo."</p></div>
+      <div class="pain-item"><div class="pain-mark"></div><p class="q">"Cada declaración me toma por sorpresa cuánto le debo al SAT."</p></div>
+      <div class="pain-item"><div class="pain-mark"></div><p class="q">"Tengo un Excel que dejé de actualizar hace tres meses."</p></div>
+      <div class="pain-item"><div class="pain-mark"></div><p class="q">"No sé si estoy ahorrando lo normal o voy muy por detrás de otros freelancers."</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lo que hace Marea por ti</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 12C3 12 3 4 5 4C7 4 7 12 9 12C11 12 11 4 13 4C15 4 15 12 15 12" stroke="#0F6E56" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Entiende tu flujo real</h3>
+        <p>No categoriza gastos como si tuvieras nómina fija. Aprende tu patrón de meses buenos y malos, y te dice cuántos meses de colchón tienes cubiertos hoy.</p>
+      </div>
+      <div class="pillar">
+        <div class="mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#0F6E56" stroke-width="1.6"/><path d="M5 8h6M8 5v6" stroke="#0F6E56" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Reserva fiscal automática</h3>
+        <p>Cada vez que facturas, calcula cuánto apartar según tu régimen. Nunca más el susto de abril.</p>
+      </div>
+      <div class="pillar">
+        <div class="mark"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#0F6E56" stroke-width="1.6"/><path d="M8 5v3l2 2" stroke="#0F6E56" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>Coach y comparativa</h3>
+        <p>Consejos en contexto cuando algo cambia, y un comparativo anónimo con freelancers de tu mismo giro y país.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top: none;">
+    <div class="stat-block">
+      <span class="num">40%</span>
+      <p>de las personas encuestadas en más de 30 países dijo estar dispuesta a pagar por una app que gestione bien sus finanzas personales. La disposición a pagar por esto ya existe. Solo faltaba una hecha para ingresos irregulares.</p>
+      <p class="source">FUENTE: FACT.MR, PERSONAL FINANCE MOBILE APP MARKET OUTLOOK</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo funciona</h2>
+    <div class="steps">
+      <div class="step"><span class="n mono">01</span><div><h3>Registra tus ingresos</h3><p>A mano o conectando tu cuenta. Toma menos de dos minutos por mes.</p></div></div>
+      <div class="step"><span class="n mono">02</span><div><h3>Marea calcula por ti</h3><p>Tu colchón real, tu reserva fiscal del mes, y tu tendencia frente a meses anteriores.</p></div></div>
+      <div class="step"><span class="n mono">03</span><div><h3>Recibe la señal a tiempo</h3><p>Una alerta cuando algo cambia, no un resumen olvidado a fin de año.</p></div></div>
+    </div>
+  </section>
+
+  <section id="unirme" style="border-top: none;">
+    <div class="cta-card">
+      <span class="scarcity"><span class="dot"></span>Beta cerrada — cupo limitado</span>
+      <h2>Sé de los primeros en probarlo</h2>
+      <p class="lede">Los primeros lugares en la beta reciben acceso anticipado gratuito y su voz define qué construimos primero. Cuando cerramos el cupo, el resto entra a lista de espera.</p>
+
+      <div class="jotform-shell">
+        <!-- PEGA AQUÍ tu código de embed de JotForm (Publish > Embed > iFrame) -->
+        <!-- Ejemplo: <iframe id="JotFormIFrame-XXXXXXXXXXXXX" title="Marea beta waitlist" src="https://form.jotform.com/TU_FORM_ID" style="width:100%; height:420px; border:none;"></iframe> -->
+      </div>
+      <p class="fine-print">Sin spam. Un correo cuando abramos tu acceso, nada más.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Preguntas antes de unirte</h2>
+    <details>
+      <summary>¿Esto sustituye a mi contador?</summary>
+      <p>No. Marea te dice cuánto apartar y cuándo, para que llegues a tu contador o a tu declaración con el dinero ya separado, no con la sorpresa de no tenerlo.</p>
+    </details>
+    <details>
+      <summary>¿Mis datos bancarios están seguros?</summary>
+      <p>La conexión bancaria, cuando esté disponible, pasa por proveedores certificados de open banking, no por nosotros directamente. Nunca vemos ni guardamos tus contraseñas.</p>
+    </details>
+    <details>
+      <summary>¿Cuánto va a costar?</summary>
+      <p>Lo básico será gratis siempre: registrar ingresos y ver tu colchón. Las funciones con IA y las alertas fiscales serán una suscripción pequeña, con descuento permanente para quienes se unan en esta beta.</p>
+    </details>
+    <details>
+      <summary>¿Cuándo lanza?</summary>
+      <p>Estamos en fase de validación. Si te unes ahora, eres de los primeros en probarlo antes del lanzamiento público.</p>
+    </details>
+  </section>
+
+  <footer>
+    <p>Marea — hecho para quienes facturan distinto cada mes.</p>
+    <a href="#unirme" class="btn btn-ghost">Unirme a la lista</a>
+  </footer>
+</div>
+
+</body>
+</html>
